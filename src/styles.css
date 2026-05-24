@@ -1,0 +1,316 @@
+@import "tailwindcss";
+
+@theme {
+  --color-ink: #080706;
+  --color-smoke: #100d0a;
+  --color-ivory: #f5efe4;
+  --color-amber: #c9894b;
+  --color-olive: #777052;
+  --font-serif: "Instrument Serif", Georgia, serif;
+  --font-sans: "Manrope", sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: auto;
+  background: #080706;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  overflow-x: hidden;
+  background:
+    radial-gradient(circle at 20% 0%, rgba(201, 137, 75, 0.13), transparent 28rem),
+    linear-gradient(180deg, #080706 0%, #100d0a 48%, #080706 100%);
+  color: #f5efe4;
+  font-family: "Manrope", sans-serif;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+}
+
+img,
+video {
+  max-width: 100%;
+}
+
+::selection {
+  background: rgba(201, 137, 75, 0.42);
+  color: #fff8ec;
+}
+
+.video-fallback {
+  z-index: -1;
+}
+
+video:not([src]) + .video-fallback,
+video:empty + .video-fallback {
+  z-index: 0;
+}
+
+.grain {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  opacity: 0.17;
+  mix-blend-mode: screen;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 220 220' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.62'/%3E%3C/svg%3E");
+  animation: grain 8s steps(10) infinite;
+}
+
+@keyframes grain {
+  0%, 100% { transform: translate(0, 0); }
+  20% { transform: translate(-2%, 1%); }
+  40% { transform: translate(1%, -2%); }
+  60% { transform: translate(2%, 2%); }
+  80% { transform: translate(-1%, -1%); }
+}
+
+.nav-link {
+  position: relative;
+  font-size: 0.68rem;
+  transition: color 0.35s ease;
+}
+
+.nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -0.45rem;
+  height: 1px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: right;
+  background: #c9894b;
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.nav-link:hover {
+  color: #c9894b;
+}
+
+.nav-link:hover::after {
+  transform: scaleX(1);
+  transform-origin: left;
+}
+
+.eyebrow {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  color: rgba(245, 239, 228, 0.54);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.28em;
+  line-height: 1.2;
+  text-transform: uppercase;
+}
+
+.eyebrow::before {
+  content: "";
+  width: 2.8rem;
+  height: 1px;
+  background: rgba(201, 137, 75, 0.75);
+}
+
+.cta {
+  display: inline-flex;
+  min-height: 3.4rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  border: 1px solid rgba(245, 239, 228, 0.22);
+  border-radius: 999px;
+  background: rgba(245, 239, 228, 0.06);
+  padding: 0.95rem 1.25rem;
+  color: #f5efe4;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  transition: border-color 0.35s ease, background 0.35s ease, color 0.35s ease;
+}
+
+.cta:hover {
+  border-color: rgba(201, 137, 75, 0.84);
+  background: rgba(201, 137, 75, 0.16);
+  color: #ffd9ae;
+}
+
+.section-grid {
+  display: grid;
+  max-width: 1500px;
+  margin: 0 auto;
+  gap: 3rem;
+  padding: 7rem 1.25rem;
+}
+
+.section-title {
+  margin-top: 1rem;
+  color: #f5efe4;
+  font-family: "Instrument Serif", Georgia, serif;
+  font-size: clamp(3.2rem, 7vw, 8rem);
+  line-height: 0.88;
+}
+
+.experience-title {
+  max-width: 9.5ch;
+  font-size: clamp(3rem, 5.8vw, 6.9rem);
+}
+
+.dish-tile {
+  position: relative;
+  min-height: 470px;
+  overflow: hidden;
+  background: #16110d;
+}
+
+.menu-tab {
+  flex: 0 0 auto;
+  width: max-content;
+  border: 1px solid rgba(245, 239, 228, 0.12);
+  border-radius: 999px;
+  padding: 0.9rem 1rem;
+  color: rgba(245, 239, 228, 0.56);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: border-color 0.35s ease, color 0.35s ease, background 0.35s ease;
+}
+
+.menu-tab:hover,
+.menu-tab.is-active {
+  border-color: rgba(201, 137, 75, 0.72);
+  background: rgba(201, 137, 75, 0.12);
+  color: #f5efe4;
+}
+
+.reservation-panel {
+  display: grid;
+  gap: 1rem;
+  border: 1px solid rgba(245, 239, 228, 0.14);
+  background: rgba(8, 7, 6, 0.72);
+  padding: 1rem;
+  backdrop-filter: blur(18px);
+}
+
+.reservation-panel label {
+  display: grid;
+  gap: 0.7rem;
+  color: rgba(245, 239, 228, 0.52);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+}
+
+.reservation-panel input,
+.reservation-panel select,
+.reservation-panel textarea {
+  width: 100%;
+  border: 1px solid rgba(245, 239, 228, 0.13);
+  border-radius: 0;
+  background: rgba(245, 239, 228, 0.055);
+  color: #f5efe4;
+  outline: none;
+  padding: 1rem;
+  transition: border-color 0.25s ease, background 0.25s ease;
+}
+
+.reservation-panel textarea {
+  min-height: 8rem;
+  resize: vertical;
+}
+
+.whatsapp-cta {
+  display: inline-flex;
+  min-height: 3.1rem;
+  align-items: center;
+  justify-content: center;
+  gap: 0.7rem;
+  border: 1px solid rgba(119, 112, 82, 0.58);
+  border-radius: 999px;
+  color: rgba(245, 239, 228, 0.76);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  transition: border-color 0.35s ease, background 0.35s ease, color 0.35s ease;
+}
+
+.whatsapp-cta:hover {
+  border-color: rgba(201, 137, 75, 0.78);
+  background: rgba(119, 112, 82, 0.14);
+  color: #f5efe4;
+}
+
+.reservation-panel input:focus,
+.reservation-panel select:focus,
+.reservation-panel textarea:focus {
+  border-color: rgba(201, 137, 75, 0.8);
+  background: rgba(245, 239, 228, 0.08);
+}
+
+@media (min-width: 768px) {
+  .section-grid {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    padding: 9rem 2rem;
+  }
+
+  .experience-grid {
+    align-items: center;
+    column-gap: 2rem;
+  }
+
+  .reservation-panel {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .menu-tab {
+    display: block;
+    width: 100%;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+    text-align: left;
+  }
+}
+
+@media (max-width: 767px) {
+  .section-grid {
+    padding-top: 5.5rem;
+    padding-bottom: 5.5rem;
+  }
+
+  .eyebrow {
+    font-size: 0.66rem;
+  }
+
+  .eyebrow::before {
+    width: 1.9rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
+}
